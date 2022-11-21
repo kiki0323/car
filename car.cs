@@ -4,22 +4,32 @@ using UnityEngine;
 
 public class car : MonoBehaviour
 {
+
     float speed = 0;
+    Vector2 start;
+    // Start is called before the first frame update
     void Start()
     {
 
     }
+
+    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            speed = 0.2f;
+            start = Input.mousePosition;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            Vector2 end = Input.mousePosition;
+            float swipeLength = end.x - start.x;
+            speed = swipeLength / 500.0f;
+            GetComponent<AudioSource>().Play();
         }
         transform.Translate(speed, 0, 0);
-        {
-            speed *= 0.98f;
-        }
+        speed *= 1.0f;
     }
-}
-
+        }
     
+
